@@ -6,10 +6,6 @@ unsigned char x,y;
 int del = 7000;
 int cl = 0;
 
-char inData[50]; // Allocate some space for the string
-char inChar; // Where to store the character read
-int index = 0; // Index into array; where to store the character
-
 int bit1Pin = 2;
 int bit2Pin = 3;
 int bit4Pin = 4;
@@ -24,6 +20,7 @@ bool bit4Val = 0;
 bool bit8Val = 0;
 bool bit16Val = 0;
 bool sendVal = 0;
+bool clearVal = 0;
 
 int inputVal = 0;
 char onScreen[50];
@@ -47,6 +44,7 @@ void setup()  {
 
 void loop() {
   sendVal = digitalRead(sendPin);
+  clearVal = digitalRead(clearPin);
   if (sendVal == LOW){
   
     bit1Val = digitalRead(bit1Pin);
@@ -88,6 +86,11 @@ void loop() {
     TV.println(onScreen);
     delay(200);
   } else {
+    if (clearVal == LOW) {
+      while(charIndex >= 0) {
+        onScreen[charIndex--] = 32;
+      }
+    }
     TV.clear_screen();
     TV.println(onScreen);
     delay(200);
