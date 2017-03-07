@@ -1,3 +1,4 @@
+
 #include <TVout.h>
 #include <fontALL.h>
 
@@ -20,8 +21,14 @@ void setup()  {
 }
 
 void loop() {
-  while(Serial.available() > 0) // Don't read unless
-                                                 // there you know there is data
+  
+
+
+
+  
+  while(Serial.available() > 0)
+  // Don't read unless you know there is data
+  
   {
       if(index < 49) // One less than the size of the array
       {
