@@ -43,6 +43,9 @@ void setup()  {
 }
 
 void loop() {
+  if (charIndex < 0) {
+    charIndex = 0;
+  }
   sendVal = digitalRead(sendPin);
   clearVal = digitalRead(clearPin);
   if (sendVal == LOW){
@@ -87,8 +90,13 @@ void loop() {
     delay(200);
   } else {
     if (clearVal == LOW) {
-      while(charIndex >= 0) {
-        onScreen[charIndex--] = 32;
+      bit16Val = digitalRead(bit16Pin);
+      if (bit16Val) {
+        onScreen[--charIndex] = 32;
+      } else {
+        while(charIndex >= 0) {
+          onScreen[charIndex--] = 32;
+        }
       }
     }
     TV.clear_screen();
