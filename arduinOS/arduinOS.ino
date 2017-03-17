@@ -1,6 +1,9 @@
+#include <PS2uartKeyboard.h>
+
 #include <TVout.h>
 #include <fontALL.h>
-#include <PS2Keyboard.h>
+//#include <PS2Keyboard.h>
+
 
 TVout TV;
 unsigned char x,y;
@@ -14,7 +17,7 @@ int charIndex = 0;
 const int DataPin = 2;
 const int IRQpin =  3;
 
-PS2Keyboard keyboard;
+PS2uartKeyboard keyboard;
 
 void setup()  {
   delay(1000);
@@ -64,6 +67,7 @@ void loop() {
     }
     TV.clear_screen();
     TV.println(onScreen);
+    Serial.println(onScreen);
     delay(200);
   } else {
     TV.println("No Keyboard");
