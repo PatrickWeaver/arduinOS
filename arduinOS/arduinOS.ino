@@ -1,7 +1,9 @@
+#include <TVout.h>
+#include <video_gen.h>
+
 #include <PS2uartKeyboard.h>
 
-#include <TVout.h>
-#include <fontALL.h>
+#include <TVoutfonts/fontALL.h>
 //#include <PS2Keyboard.h>
 
 
@@ -16,21 +18,36 @@ int charIndex = 0;
 
 const int DataPin = 2;
 const int IRQpin =  3;
+const long start = millis();
 
 PS2uartKeyboard keyboard;
 
 void setup()  {
+  
   delay(1000);
   keyboard.begin(DataPin, IRQpin);
   Serial.begin(9600);
-  Serial.print("Power On\n");
-  x=0;
-  y=0;
+  Serial.println("Power On");
   TV.begin(NTSC);  //for devices with only 1k sram(m168) use TV.begin(_NTSC,128,56)
   TV.select_font(font8x8ext);
 }
 
 void loop() {
+  int times = millis();
+  int dur =  times - start;
+  Serial.println(dur);
+  TV.clear_screen();
+  TV.println("HELLO");
+  //Serial.println(onScreen);
+  //Serial.println();
+  times = millis();
+  dur =  times - start;
+  Serial.println(dur);
+  Serial.println();
+
+  delay(200);
+  
+
   if (charIndex < 0) {
     charIndex = 0;
   }
@@ -65,12 +82,5 @@ void loop() {
       Serial.print(c);
       onScreen[charIndex++] = c;
     }
-    TV.clear_screen();
-    TV.println(onScreen);
-    Serial.println(onScreen);
-    delay(200);
-  } else {
-    TV.println("No Keyboard");
-    delay(3000);
   }
 }

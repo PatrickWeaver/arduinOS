@@ -1,6 +1,7 @@
 
 #include <TVout.h>
-#include <fontALL.h>
+#include <video_gen.h>
+#include <TVoutfonts/fontALL.h>
 
 TVout TV;
 unsigned char x,y;
@@ -44,6 +45,8 @@ void loop() {
           inData[index] = '\0'; // Null terminate the string
       }
   }
+
+  /*
   // Now do something with the string (but not using ==)
   TV.clear_screen();
   Serial.print("\n**\n");
@@ -57,7 +60,7 @@ void loop() {
   Serial.print(inData);
   Serial.print("\n");
   Serial.print("\n**\n");
-  char reset[1] = "|";
+  char reset[2] = "|";
   if (inData[index - 2] == reset[0]) {
     Serial.print("\n\nRESET\n\n");
     while(index > 0) {
@@ -74,4 +77,5 @@ void loop() {
       TV.delay(2000);
     }
   }
+  */
 }
